@@ -5,7 +5,7 @@ import random
 
 print("HELLO EVERYONE")
 
-print("MADE BY RAID MESBAHI : DO NOT USE THIS PROJECT WITHOUT CONSENT FROM ME HERE IS MY GMAIL : herobrineraid@gmail.com")
+print("MADE BY RAID MESBAHI update by Lina : DO NOT USE THIS PROJECT WITHOUT CONSENT FROM ME HERE IS MY GMAIL : herobrineraid@gmail.com")
 
 # Initialize pygame
 pygame.init()
