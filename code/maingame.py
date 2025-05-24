@@ -4,6 +4,10 @@ import random
 # Initialize pygame
 pygame.init()
 
+print("HELLO EVERYONE")
+
+print("MADE BY RAID MESBAHI : DO NOT USE THIS PROJECT WITHOUT CONSENT FROM ME HERE IS MY GMAIL : herobrineraid@gmail.com")
+
 # Screen settings
 WIDTH, HEIGHT = 500, 500
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
