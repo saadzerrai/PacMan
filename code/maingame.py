@@ -1,5 +1,11 @@
+import os
 import pygame
 import random
+
+
+print("HELLO EVERYONE")
+
+print("MADE BY RAID MESBAHI update by Lina : DO NOT USE THIS PROJECT WITHOUT CONSENT FROM ME HERE IS MY GMAIL : herobrineraid@gmail.com")
 
 # Initialize pygame
 pygame.init()
@@ -7,34 +13,47 @@ pygame.init()
 print("HELLO EVERYONE")
 
 print("MADE BY RAID MESBAHI : DO NOT USE THIS PROJECT WITHOUT CONSENT FROM ME HERE IS MY GMAIL : herobrineraid@gmail.com")
-print("Update by SAAD ZERRAI") 
+
 # Screen settings
 WIDTH, HEIGHT = 500, 500
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Mini Pac-Man")
 
-# Function to load images with transparency and fill the screen if needed
+# Assets directory - using relative path
+assets_dir = os.path.join(os.path.dirname(__file__), "..", "assets")
+
+def clean_asset_folder(folder_path):
+    for fname in os.listdir(folder_path):
+        if fname.startswith("._"):
+            os.remove(os.path.join(folder_path, fname))
+            print(f"[INFO] Removed temporary file: {fname}")
+
 def load_image(filepath, scale=None, fill_screen=False):
+    if not os.path.exists(filepath):
+        print(f"[ERROR] File not found: {filepath}")
+        raise FileNotFoundError(filepath)
     try:
         image = pygame.image.load(filepath).convert_alpha()
         if scale:
             image = pygame.transform.scale(image, scale)
         if fill_screen:
             image = pygame.transform.scale(image, (WIDTH, HEIGHT))
+        print(f"[OK] Loaded image: {os.path.basename(filepath)}")
         return image
-    except pygame.error as message:
-        print(f"Cannot load image: {filepath} - {message}")
-        raise SystemExit(message)
+    except pygame.error as e:
+        print(f"[ERROR] Failed to load: {filepath} - {e}")
+        raise SystemExit(e)
 
-# Load images (without os.path.join)
-# C:\Users\Dell Latitude\Desktop\Projets python pro 1  2024-2025\Raid Mrsbahi\project\assets\._bg.png
-assets_dir = r"C:\Users\Dell Latitude\Desktop\Projets python pro 1  2024-2025\Raid Mrsbahi\project\assets"
-bg_img = load_image(assets_dir+"\bg.png", fill_screen=True)
-victory_img = load_image(assets_dir + "\win.png", fill_screen=True)
-game_over_img = load_image(assets_dir + "\ggs.jpeg", fill_screen=True)
-pacman_img = load_image(assets_dir + "\pacman.png", (30, 30))
-ghost_img = load_image(assets_dir + "\ghost.png", (30, 30))
-food_img = load_image(assets_dir + "\food.png", (10, 10))
+# Clean up any temporary files in assets folder
+clean_asset_folder(assets_dir)
+
+# Load images using proper path joining
+bg_img = load_image(os.path.join(assets_dir, "bg.png"), fill_screen=True)
+victory_img = load_image(os.path.join(assets_dir, "win.png"), fill_screen=True)
+game_over_img = load_image(os.path.join(assets_dir, "ggs.jpeg"), fill_screen=True)
+pacman_img = load_image(os.path.join(assets_dir, "pacman.png"), scale=(30, 30))
+ghost_img = load_image(os.path.join(assets_dir, "ghost.png"), scale=(30, 30))
+food_img = load_image(os.path.join(assets_dir, "food.png"), scale=(10, 10))
 
 # Pac-Man settings
 pacman = pygame.Rect(50, 50, 30, 30)
